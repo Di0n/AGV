@@ -2,7 +2,7 @@ import TI.*;
 import java.util.*;
 public class Main
 {
-    
+    // Main
     public static void main(String[] args)
     {
         Detection detection = new Detection(10, 11,10000);
