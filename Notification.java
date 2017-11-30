@@ -16,6 +16,7 @@ public class Notification
         {
             led.update();
         }
+        speaker.update();
     }
     
     public void blink(int led)

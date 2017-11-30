@@ -67,6 +67,4 @@ public class Led
         BoeBot.rgbSet(led,0,0,0);
         BoeBot.rgbShow();
     }
-    
-    
 }
