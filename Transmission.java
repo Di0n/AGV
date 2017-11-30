@@ -5,8 +5,6 @@ public class Transmission
     private Servo leftServo;
     private Servo rightServo;
     private Timer turnTimer;
-    private Timer goToSpeedTimer;
-    private Timer eigth;
     private int targetSpeedLeft;
     private int targetSpeedRight;
     private boolean accelerate;
