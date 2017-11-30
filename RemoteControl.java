@@ -52,7 +52,7 @@ public class RemoteControl
                 remoteControlEngaged = false;
             break;
             case TURN_EIGHT:
-                transmission.turnEight();
+                //transmission.turnEight();
             break;
             default:
             break;
