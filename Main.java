@@ -9,7 +9,6 @@ public class Main
         Detection detection = new Detection(10, 11,10000);
         Transmission transmission = new Transmission(12, 13);
         RemoteControl control = new RemoteControl(transmission, true);
-        Led led = new Led();
         System.out.println("Running...");
  
         while (true)
@@ -25,8 +24,7 @@ public class Main
                 System.out.println("Stopped");
             }
             control.update();
-            led.update();
-            BoeBot.wait(10);
+            BoeBot.wait(1);
         }
     }
 }
