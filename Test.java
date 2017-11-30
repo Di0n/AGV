@@ -7,7 +7,6 @@ import TI.*;
  */
 public class Test
 {
-
     public static void main(String[] args)
     {
         Servo s1 = new Servo(12);
@@ -87,5 +86,6 @@ public class Test
             }
              */
     }
+    
 
 }
