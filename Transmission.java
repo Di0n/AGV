@@ -1,6 +1,7 @@
 import TI.*;
 public class Transmission
 {
+    private Motor motor;
     private Servo leftServo;
     private Servo rightServo;
     private Timer turnTimer;
@@ -14,6 +15,7 @@ public class Transmission
 
     public Transmission(int leftServoPin, int rightServoPin)
     {
+        motor = new Motor();
         leftServo = new Servo(leftServoPin);
         rightServo = new Servo(rightServoPin);
         turnTimer = null;
@@ -175,6 +177,20 @@ public class Transmission
         int leftServoSpeed = Math.abs(1500 - leftServo.getPulseWidth());
         int rightServoSpeed = Math.abs(1500 - rightServo.getPulseWidth());
         return leftServoSpeed > rightServoSpeed ? leftServoSpeed : rightServoSpeed;
+    }
+
+    public void turnEight()
+    {
+        leftServo.update(1450);
+        rightServo.update(1700);
+        BoeBot.wait(4700);
+        leftServo.update(1300);
+        rightServo.update(1550);
+        BoeBot.wait(8000);
+        leftServo.update(1500);
+        rightServo.update(1500);
+        leftServo.update(1450);
+        rightServo.update(1700);
     }
 
     public void goSlowToSpeed(int speedPercentage)
