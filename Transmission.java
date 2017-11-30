@@ -177,20 +177,6 @@ public class Transmission
         return leftServoSpeed > rightServoSpeed ? leftServoSpeed : rightServoSpeed;
     }
 
-    public void turnEight()
-    {
-        leftServo.update(1450);
-        rightServo.update(1700);
-        BoeBot.wait(4700);
-        leftServo.update(1300);
-        rightServo.update(1550);
-        BoeBot.wait(8000);
-        leftServo.update(1500);
-        rightServo.update(1500);
-        leftServo.update(1450);
-        rightServo.update(1700);
-    }
-
     public void goSlowToSpeed(int speedPercentage)
     {
         int maxSpeed = 200;
