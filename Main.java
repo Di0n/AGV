@@ -24,7 +24,7 @@ public class Main
                 System.out.println("Stopped");
             }
             control.update();
-            BoeBot.wait(10);
+            BoeBot.wait(1);
         }
     }
 }
