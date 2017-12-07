@@ -20,19 +20,19 @@ public class Route
         return controlCodes;
     }
 
-    public static Route getRoute(int[] data)
+    public static Route getRoute(ArrayList<Integer> data)
     {
-        if(!(data.length > 0)) return null;    
-        else if(data[0] != 0x3e) return null;  // > char
+        if(!(data.size() > 0)) return null;    
+        else if(data.get(0) != 0x3e) return null;  // > char
 
         ArrayList<ControlCode> controlCodes = new ArrayList<>();
-        for(int i = 1 ; i < data.length ; i++)
+        for(int i = 1 ; i < data.size() ; i++)
         {
-            if(data[i] == 0x00)  // \0 char
+            if(data.get(i) == 0x00)  // \0 char
             {
                 break;
             }
-            switch(data[i])
+            switch(data.get(i))
             {
                 case 0x66: 
                 controlCodes.add(ControlCode.FORWARD);
