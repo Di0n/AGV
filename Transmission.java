@@ -2,18 +2,17 @@ import TI.*;
 public class Transmission
 {
     private Motor motor;
-    private Servo leftServo;
-    private Servo rightServo;
     private Timer turnTimer;
     private int targetSpeedLeft;
     private int targetSpeedRight;
     private boolean accelerate;
     private boolean stop;
     private int speedPercentage1;
-
+    private Servo leftServo, rightServo;
+    
     public Transmission(int leftServoPin, int rightServoPin)
     {
-        motor = new Motor();
+        //motor = new Motor();
         leftServo = new Servo(leftServoPin);
         rightServo = new Servo(rightServoPin);
         turnTimer = null;
