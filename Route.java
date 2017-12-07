@@ -22,13 +22,13 @@ public class Route
 
     public static Route getRoute(int[] data)
     {
-        if(!(data.length > 0)) return null;
-        else if(data[0] != '>') return null;
+        if(!(data.length > 0)) return null;    
+        else if(data[0] != 0x3e) return null;  // > char
 
         ArrayList<ControlCode> controlCodes = new ArrayList<>();
         for(int i = 1 ; i < data.length ; i++)
         {
-            if(data[i] == '\0')
+            if(data[i] == 0x00)  // \0 char
             {
                 break;
             }
