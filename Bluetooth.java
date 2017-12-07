@@ -6,8 +6,8 @@ import java.util.*;
 
 public class Bluetooth
 {
-    final SerialConnection conn;
-    final int BAUDRATE = 115200;
+    private final SerialConnection conn;
+    private final int BAUDRATE = 115200;
     private ArrayList<Integer> data;
     
     public Bluetooth()
@@ -18,9 +18,14 @@ public class Bluetooth
     
     public void update()
     {
-        if (conn.available() > 0) data.add(conn.readByte());
+        if (conn.available() > 0) data.add(conn.readByte());            
+        else data.clear();
     }
     
+    public boolean dataReady()
+    {
+        return (conn.available() == 0 && data.size() > 0);
+    }
     public ArrayList<Integer> getData()
     {
         return data;
