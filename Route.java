@@ -5,7 +5,7 @@ public class Route
     {
         FORWARD,
         LEFT,
-        RIGHT,
+        RIGHT;
         //STOP;
     }
 
