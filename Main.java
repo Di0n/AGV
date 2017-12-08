@@ -29,7 +29,8 @@ public class Main
             if (bluetooth.dataReady())
             {
                 Route route = Route.getRoute(bluetooth.getData()); 
-                
+                if (route != null)
+                    System.out.println("Route accepted!");
                 
             }
             BoeBot.wait(1);
