@@ -1,6 +1,8 @@
 import java.util.*;
+import java.awt.Point;
 public class Route
 {
+    public static final int[][] grid = new int[5][2];
     public enum ControlCode
     {
         FORWARD,
@@ -21,6 +23,27 @@ public class Route
     }
 
     /*
+     * 
+     */
+    public static Route getRoute(ArrayList<Integer> data)
+    {
+        if ((!(data.size() > 0)) || data.get(0) != 0x3e) return null;
+        
+        Point startPos;
+        ArrayList<Point> commands = new ArrayList<>();
+        for (int i = 1; i < data.size(); i++)
+        {
+            if (data.get(i) == 0x00) break;
+            if (data.get(i) == 0x73)  // s
+            {
+                
+            }
+            
+            
+        }
+    }
+    
+    /*
      * Route protocol voorbeeld: >,0x66,0x66, 0x6c, 0x66, 0x72, 0x66, 0x00
      * Vertaald: 0x3e > geeft begin aan van reeks, als dit ontbreekt is het geen geldig verzoek
      * 0x66 FORWARD Voorwaards
@@ -30,7 +53,7 @@ public class Route
      * @param data protocol
      * @return Route object
      */
-    public static Route getRoute(ArrayList<Integer> data)
+    public static Route getRoute2(ArrayList<Integer> data)
     {
         if(!(data.size() > 0)) return null;    
         else if(data.get(0) != 0x3e) return null;  // > char
