@@ -11,18 +11,24 @@ public class Route
         //STOP;
     }
 
-    private ArrayList<ControlCode> controlCodes;
-    public Route(ArrayList<ControlCode> controlCodes)
+    //private ArrayList<ControlCode> controlCodes;
+    private ArrayList<Point> positions;
+    
+    public Route(ArrayList<Point> positions)
     {
-        this.controlCodes = controlCodes;
+        this.positions = positions;
     }
 
-    public ArrayList<ControlCode> getControlCodes()
+   /* public ArrayList<ControlCode> getControlCodes()
     {
         return controlCodes;
+    }*/
+    public ArrayList<Point> getPositions()
+    {
+        return positions;
     }
 
-    /*
+    /* Route protocol: >r(6,y),(x,y),(x,y)/0 
      * 
      */
     public static Route getRoute(ArrayList<Integer> data)
@@ -30,17 +36,47 @@ public class Route
         if ((!(data.size() > 0)) || data.get(0) != 0x3e) return null;
         
         Point startPos;
-        ArrayList<Point> commands = new ArrayList<>();
+        ArrayList<Point> positions = new ArrayList<>();
+        boolean isPos = false;
         for (int i = 1; i < data.size(); i++)
         {
-            if (data.get(i) == 0x00) break;
-            if (data.get(i) == 0x73)  // s
+            int current = data.get(i);
+            if (current == 0x00) break;
+            if (current == 0x72) continue;
+            
+            if (data.get(i) == 0x28)
             {
-                
+                int x = data.get((i += 1));
+                int y = data.get((i += 2));
+                positions.add(new Point(x, y));
+            }
+            /*if (current == 0x73)  // s
+            {
+               
+                int x = data.get((i += 2));
+                int y = data.get((i += 2));
+                startPos = new Point(x, y);
+            }
+            else if (current == 0x70) // p
+            {
+                int x = data.get((i += 2));
+                int y = data.get((i += 2));
+                positions.add(new Point(x, y));
+                isPos = true;
             }
             
-            
+            else if (isPos)
+            {
+                if (data.get(i) == 0x28)
+                {
+                    int x = data.get((i += 1));
+                    int y = data.get((i += 1));
+                    positions.add(new Point(x, y));
+                }
+            }*/
         }
+        
+        return new Route(positions);
     }
     
     /*
@@ -53,7 +89,7 @@ public class Route
      * @param data protocol
      * @return Route object
      */
-    public static Route getRoute2(ArrayList<Integer> data)
+    /*public static Route getRoute2(ArrayList<Integer> data)
     {
         if(!(data.size() > 0)) return null;    
         else if(data.get(0) != 0x3e) return null;  // > char
@@ -84,6 +120,5 @@ public class Route
             }
         }
         return new Route(controlCodes);
-    }
+    }*/
 }
-

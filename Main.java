@@ -1,5 +1,6 @@
 import TI.*;
 import java.util.*;
+import java.awt.Point;
 public class Main
 {
     // Main
@@ -30,7 +31,15 @@ public class Main
             {
                 Route route = Route.getRoute(bluetooth.getData()); 
                 if (route != null)
+                {    
                     System.out.println("Route accepted!");
+                    ArrayList<Point> positions = route.getPositions();
+                    for (int i = 0; i < positions.size(); i++)
+                    {
+                        Point current = positions.get(i);
+                        System.out.println("X: "+ current.x + " Y: "+current.y);
+                    }
+                } 
                 
             }
             BoeBot.wait(1);
