@@ -9,7 +9,8 @@ public class Main
     {
         Detection detection = new Detection(10, 11,10000);
         Transmission transmission = new Transmission(12, 13);
-        RemoteControl control = new RemoteControl(transmission, true);
+        RemoteControl control = new RemoteControl(transmission, false);
+        RouteFollower routeFollower = new RouteFollower(transmission, detection);
         Bluetooth bluetooth = new Bluetooth();
         System.out.println("Running...");
  
@@ -22,8 +23,9 @@ public class Main
             {
                 transmission.goSpeedToSlow(-100);
                 //transmission.emergencyBrake();
-                System.out.println("Stopped");
             }
+            if (routeFollower.hasRoute())
+                routeFollower.update();
             control.update();
             
             bluetooth.update();
@@ -32,6 +34,7 @@ public class Main
                 Route route = Route.getRoute(bluetooth.getData()); 
                 if (route != null)
                 {    
+                    routeFollower.setRoute(route);
                     System.out.println("Route accepted!");
                     ArrayList<Point> positions = route.getPositions();
                     for (int i = 0; i < positions.size(); i++)

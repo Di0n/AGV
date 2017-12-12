@@ -5,10 +5,15 @@ public class Detection
     private int pulseInPin;         // 11
     private int pulseLength;        // 200000 = 5 meter
     private int distanceToObject;   // In centimeters
+    private final int sensorLeftPin = 2;
+    private final int sensorOuterLeftPin = 3;
+    private final int sensorRightPin = 1;
+    private final int sensorCenterPin = 0;
     private int sensorLeft;
-    private int sensorRight;
+    private int sensorOuterLeft;
     private int sensorCenter;
-    private Transmission transmission;
+    private int sensorRight;
+    
     
     public Detection(int pulseOutPin, int pulseInPin, int pulseLength)
     {
@@ -16,7 +21,7 @@ public class Detection
         this.pulseInPin = pulseInPin;
         this.pulseLength = pulseLength;
     }
-    
+    private boolean crossing = false;
     /*
      * Update de Ultrasoon sensor.
      */
@@ -29,6 +34,15 @@ public class Detection
         int pulse = BoeBot.pulseIn(pulseInPin, true, pulseLength);
         distanceToObject = pulse / 58; // afstand in centimeters
         //System.out.println(distanceToObject);
+        
+        sensorLeft = BoeBot.analogRead(sensorLeftPin);
+        sensorOuterLeft = BoeBot.analogRead(sensorOuterLeftPin);
+        sensorCenter = BoeBot.analogRead(sensorCenterPin);
+        sensorRight = BoeBot.analogRead(sensorRightPin);
+        
+        if (sensorOuterLeft > 700) crossing = true;
+        
+        if (sensorOuterLeft < 1200 && crossing) crossing = false;
     }
     
     /*
@@ -40,5 +54,9 @@ public class Detection
         return distanceToObject;
     }
     
+    public boolean isOnCrossing()
+    {
+        return crossing;
+    }
    
 }
