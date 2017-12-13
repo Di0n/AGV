@@ -13,6 +13,7 @@ public class Detection
     private int sensorOuterLeft;
     private int sensorCenter;
     private int sensorRight;
+    private int kruispunt = 0;
     
     
     public Detection(int pulseOutPin, int pulseInPin, int pulseLength)

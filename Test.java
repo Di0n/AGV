@@ -48,12 +48,12 @@ public class Test
             {
                 kruising = false;
                 s1.update(1500);
-                s2.update(1530);
+                s2.update(1700);
             } 
             else if(sensorLeft > 500)
             {
                 kruising = false;
-                s1.update(1470);
+                s1.update(1300);
                 s2.update(1500);
             }
             else

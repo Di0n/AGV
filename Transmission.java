@@ -35,8 +35,8 @@ public class Transmission
                 int servoRightUpdate = rightServo.getPulseWidth();
                 servoRightUpdate = servoRightUpdate + 1;
                 rightServo.update(servoRightUpdate);
-                System.out.println(rightServo.getPulseWidth());
-                System.out.println(leftServo.getPulseWidth());            
+                //System.out.println(rightServo.getPulseWidth());
+                //System.out.println(leftServo.getPulseWidth());            
             }
 
             if(leftServo.getPulseWidth() != targetSpeedLeft && accelerate == true)
@@ -54,8 +54,8 @@ public class Transmission
                 int servoRightUpdate = rightServo.getPulseWidth();
                 servoRightUpdate = servoRightUpdate - 1;
                 rightServo.update(servoRightUpdate);
-                System.out.println(rightServo.getPulseWidth());
-                System.out.println(leftServo.getPulseWidth());            
+                //System.out.println(rightServo.getPulseWidth());
+                //System.out.println(leftServo.getPulseWidth());            
             }
 
             if(leftServo.getPulseWidth() != targetSpeedLeft && accelerate == true)
@@ -73,8 +73,8 @@ public class Transmission
                 int servoRightUpdate = rightServo.getPulseWidth();
                 servoRightUpdate = servoRightUpdate - 1;
                 rightServo.update(servoRightUpdate);
-                System.out.println(rightServo.getPulseWidth());
-                System.out.println(leftServo.getPulseWidth());            
+                //System.out.println(rightServo.getPulseWidth());
+                //System.out.println(leftServo.getPulseWidth());            
             }
 
             if(leftServo.getPulseWidth() != targetSpeedLeft && leftServo.getPulseWidth() <= 1500)
@@ -109,15 +109,34 @@ public class Transmission
 
     public void turnRight()
     {
-        leftServo.update(1500);
-        rightServo.update(1530);
+        leftServo.update(1700);
+        rightServo.update(1700);
     }
 
-    public void turnLeft()
+    public void turnLeft(int percentage)
     {
-        leftServo.update(1470);
+        int maxSpeed = 200;
+        int speedUnit = 2;
+        int speed = percentage * speedUnit;
+
+        int speedLeft = 1500 - speed;
+        int speedRight = 1500 - speed;
+        leftServo.update(speedLeft);
+        rightServo.update(speedRight);
+    }
+    
+    public void steerLeft()
+    {
+        leftServo.update(1300);
         rightServo.update(1500);
     }
+    
+    public void steerRight()
+    {
+        leftServo.update(1500);
+        rightServo.update(1700);
+    }
+        
 
     /*
      * @param degrees Graden van 1 t/m 180 en -1 t/m -180
