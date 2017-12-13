@@ -2,35 +2,37 @@ import java.util.*;
 import java.awt.Point;
 public class Route
 {
-    public static final int[][] grid = new int[5][2];
     public enum ControlCode
     {
         FORWARD,
         LEFT,
-        RIGHT;
-        //STOP;
+        RIGHT,
+        STOP;
     }
 
-    //private ArrayList<ControlCode> controlCodes;
-    private ArrayList<Point> positions;
+    private ArrayList<ControlCode> controlCodes;
+    //private ArrayList<Point> positions;
     
-    public Route(ArrayList<Point> positions)
+    /*public Route(ArrayList<Point> positions)
     {
         this.positions = positions;
+    }*/
+    public Route(ArrayList<ControlCode> controlCodes)
+    {
+        this.controlCodes = controlCodes;
     }
-
-   /* public ArrayList<ControlCode> getControlCodes()
+    public ArrayList<ControlCode> getControlCodes()
     {
         return controlCodes;
-    }*/
-    public ArrayList<Point> getPositions()
+    }
+    /*public ArrayList<Point> getPositions()
     {
         return positions;
-    }
+    }*/
 
     /* Route protocol: >r(6,y),(x,y),(x,y)/0 
      * 
-     */
+     *
     public static Route getRoute(ArrayList<Integer> data)
     {
         if ((!(data.size() > 0)) || data.get(0) != 0x3e) return null;
@@ -50,34 +52,10 @@ public class Route
                 int y = data.get((i += 2));
                 positions.add(new Point(x, y));
             }
-            /*if (current == 0x73)  // s
-            {
-               
-                int x = data.get((i += 2));
-                int y = data.get((i += 2));
-                startPos = new Point(x, y);
-            }
-            else if (current == 0x70) // p
-            {
-                int x = data.get((i += 2));
-                int y = data.get((i += 2));
-                positions.add(new Point(x, y));
-                isPos = true;
-            }
-            
-            else if (isPos)
-            {
-                if (data.get(i) == 0x28)
-                {
-                    int x = data.get((i += 1));
-                    int y = data.get((i += 1));
-                    positions.add(new Point(x, y));
-                }
-            }*/
         }
         
         return new Route(positions);
-    }
+    }*/
     
     /*
      * Route protocol voorbeeld: >,0x66,0x66, 0x6c, 0x66, 0x72, 0x66, 0x00
@@ -89,7 +67,7 @@ public class Route
      * @param data protocol
      * @return Route object
      */
-    /*public static Route getRoute2(ArrayList<Integer> data)
+    public static Route getRoute(ArrayList<Integer> data)
     {
         if(!(data.size() > 0)) return null;    
         else if(data.get(0) != 0x3e) return null;  // > char
@@ -112,13 +90,13 @@ public class Route
                 case 0x72:
                     controlCodes.add(ControlCode.RIGHT);
                 break;
-                //case 0x73:
-                //controlCodes.add(ControlCode.STOP);
-                //break;
+                case 0x73:
+                    controlCodes.add(ControlCode.STOP);
+                break;
                 default:
                     return null;
             }
         }
         return new Route(controlCodes);
-    }*/
+    }
 }

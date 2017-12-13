@@ -31,16 +31,16 @@ public class Main
             bluetooth.update();
             if (bluetooth.dataReady())
             {
+                System.out.println("ontvangen");
                 Route route = Route.getRoute(bluetooth.getData()); 
                 if (route != null)
                 {    
                     routeFollower.setRoute(route);
                     System.out.println("Route accepted!");
-                    ArrayList<Point> positions = route.getPositions();
-                    for (int i = 0; i < positions.size(); i++)
+                    ArrayList<Route.ControlCode> codes = new ArrayList<>();
+                    for (Route.ControlCode c : codes)
                     {
-                        Point current = positions.get(i);
-                        System.out.println("X: "+ current.x + " Y: "+current.y);
+                        System.out.println(c.toString());
                     }
                 } 
                 

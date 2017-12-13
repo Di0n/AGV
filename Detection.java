@@ -5,10 +5,10 @@ public class Detection
     private int pulseInPin;         // 11
     private int pulseLength;        // 200000 = 5 meter
     private int distanceToObject;   // In centimeters
-    private final int sensorLeftPin = 2;
+    private final int sensorLeftPin = 0;
     private final int sensorOuterLeftPin = 3;
-    private final int sensorRightPin = 1;
-    private final int sensorCenterPin = 0;
+    private final int sensorRightPin = 2;
+    private final int sensorCenterPin = 1;
     private int sensorLeft;
     private int sensorOuterLeft;
     private int sensorCenter;
