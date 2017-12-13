@@ -109,14 +109,14 @@ public class Transmission
 
     public void turnRight()
     {
-        leftServo.update(1450);
-        rightServo.update(1700);
+        leftServo.update(1500);
+        rightServo.update(1530);
     }
 
     public void turnLeft()
     {
-        leftServo.update(1300);
-        rightServo.update(1550);
+        leftServo.update(1470);
+        rightServo.update(1500);
     }
 
     /*

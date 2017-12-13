@@ -1,6 +1,4 @@
 import TI.*;
-import jssc.SerialPort;
-import jssc.SerialPortException;
 import java.util.*;
 
 
