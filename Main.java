@@ -15,19 +15,21 @@ public class Main
         System.out.println("Running...");
         boolean gek = false;
         boolean testBt = true;
+        BoeBot.wait(3000);
         while (true)
         {
             control.update();
             transmission.update();
             detection.update();
 
-            if (detection.getDistanceToObject() <= 45 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled()) // 15 centimeter
+            if (detection.getDistanceToObject() <= 5 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled()) // 15 centimeter
             {
                 //transmission.goSpeedToSlow(-100);
                 //transmission.emergencyBrake();
-                System.out.println("Sonar");
+                System.out.println("stop");
+                //transmission.emergencyBrake();
             }
-            else if (routeFollower.hasRoute())
+            if (routeFollower.hasRoute())
                 routeFollower.update();
                 
              if(testBt == true)
@@ -37,6 +39,8 @@ public class Main
                 ssss.add(0x3e);
                 ssss.add(0x66);
                 ssss.add(0x6c); //0x66 Forward
+                ssss.add(0x66);
+                ssss.add(0x6c);
                 ssss.add(0x66);
                 ssss.add(0x73);
                 ssss.add(0x00);

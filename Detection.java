@@ -23,6 +23,7 @@ public class Detection
         this.pulseLength = pulseLength;
     }
     private boolean crossing = false;
+    private boolean centerOnLine;
     /*
      * Update de Ultrasoon sensor.
      */
@@ -45,7 +46,8 @@ public class Detection
         
         if (sensorOuterLeft < 1200 && crossing) crossing = false;
         
-         
+         if (sensorCenter > 700) centerOnLine = true;
+         if (sensorCenter < 1200 && centerOnLine) centerOnLine = false;
     }
     
     /*
@@ -64,7 +66,7 @@ public class Detection
     
     public boolean isCenterOnLine()
     {
-        return BoeBot.analogRead(sensorCenterPin) > 700; 
+        return centerOnLine;
     }
    
 }

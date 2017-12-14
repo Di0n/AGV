@@ -49,7 +49,7 @@ public class RouteFollower
         sensorCenter = BoeBot.analogRead(sensorCenterPin);
         sensorRight = BoeBot.analogRead(sensorRightPin);
         //System.out.println("Left " + sensorLeft);
-       // System.out.println("OuterLeft " + sensorOuterLeft);
+        //System.out.println("OuterLeft " + sensorOuterLeft);
         //System.out.println("Center " + sensorCenter);
         //System.out.println("Right " + sensorRight);
         //System.out.println("Overcorssing: " + (isPreviousCrossing == true && detection.isOnCrossing() == false));
@@ -57,7 +57,9 @@ public class RouteFollower
         
         boolean outerCrossed = (isPreviousCrossing == true && detection.isOnCrossing() == false);
         boolean centerCrossed = (previousCenterCrossing == true && detection.isCenterOnLine() == false); // ?? detection
-       /* if (turning == true && (centerCrossed || crossCounter >= 1))
+        
+       
+       if (turning == true && (centerCrossed || crossCounter >= 1))
         {
             System.out.println("Counter: "+crossCounter);
             crossCounter++;
@@ -67,10 +69,11 @@ public class RouteFollower
                 
                 transmission.goToSpeed(30);
                 turning = false;
+
             }
             
-        }*/
-        if (outerCrossed || controlCodes.size() == totalControlCodes - 1)
+        }
+       if ( (turning == false && outerCrossed) || (controlCodes.size() == totalControlCodes - 1))
         {
             final Route.ControlCode nextStep = controlCodes.remove();
             switch (nextStep)
@@ -103,6 +106,23 @@ public class RouteFollower
             }
         }
         
+        if (turning == false && sensorCenter > 700)
+       {
+           
+           if (sensorRight > 700) // wit 100 ~ 200
+           {transmission.steerRight();
+               
+           }
+           else if (sensorLeft> 700) // wit = 100
+           {
+              transmission.steerLeft(); 
+           }
+           else
+           {
+               transmission.goToSpeed(30);
+           }
+           
+       }
         previousCenterCrossing = detection.isCenterOnLine();
         isPreviousCrossing = detection.isOnCrossing();
     }
