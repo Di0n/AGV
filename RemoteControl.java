@@ -34,7 +34,7 @@ public class RemoteControl
                 transmission.goSlowToSpeed(-100);
             break;
             case LEFT:
-                transmission.turnDegrees(-90, 50);
+                transmission.turnDegrees(-120, 100);
                 //transmission.turnLeft();
             break;
             case RIGHT:

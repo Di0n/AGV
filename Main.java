@@ -17,39 +17,42 @@ public class Main
         boolean testBt = true;
         while (true)
         {
+            control.update();
             transmission.update();
             detection.update();
 
             if (detection.getDistanceToObject() <= 45 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled()) // 15 centimeter
             {
-                transmission.goSpeedToSlow(-100);
+                //transmission.goSpeedToSlow(-100);
                 //transmission.emergencyBrake();
+                System.out.println("Sonar");
             }
-            if (routeFollower.hasRoute())
+            else if (routeFollower.hasRoute())
                 routeFollower.update();
-            if (testBt == true)
+                
+             if(testBt == true)
             {
                 //>,0x66,0x66, 0x6c, 0x66, 0x72, 0x66, 0x00
                 ArrayList<Integer> ssss = new ArrayList<>();
                 ssss.add(0x3e);
                 ssss.add(0x66);
+                ssss.add(0x6c); //0x66 Forward
                 ssss.add(0x66);
-                ssss.add(0x66);
+                ssss.add(0x73);
                 ssss.add(0x00);
+                
                 Route route = Route.getRoute(ssss); 
+                
                 if (route != null)
                 {    
                     routeFollower.setRoute(route);
                     System.out.println("Route accepted!");
                     ArrayList<Route.ControlCode> codes = new ArrayList<>();
-                    for (Route.ControlCode c : codes)
-                    {
-                        System.out.println(c.toString());
-                    }
-
                 } 
                 testBt = false;
+               
             }
+            /*
             bluetooth.update();
             if (bluetooth.dataReady())
             {
@@ -64,10 +67,9 @@ public class Main
                     {
                         System.out.println(c.toString());
                     }
-
                 } 
-
             }
+            */
 
             BoeBot.wait(1);
         }

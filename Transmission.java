@@ -107,10 +107,16 @@ public class Transmission
         rightServo.update(speedRight);
     }
 
-    public void turnRight()
+    public void turnRight(int percentage)
     {
-        leftServo.update(1700);
-        rightServo.update(1700);
+        int maxSpeed = 200;
+        int speedUnit = 2;
+        int speed = percentage * speedUnit;
+
+        int speedLeft = 1500 + speed;
+        int speedRight = 1500 + speed;
+        leftServo.update(speedLeft);
+        rightServo.update(speedRight);
     }
 
     public void turnLeft(int percentage)

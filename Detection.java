@@ -44,6 +44,8 @@ public class Detection
         if (sensorOuterLeft > 700) crossing = true;
         
         if (sensorOuterLeft < 1200 && crossing) crossing = false;
+        
+         
     }
     
     /*
@@ -58,6 +60,11 @@ public class Detection
     public boolean isOnCrossing()
     {
         return crossing;
+    }
+    
+    public boolean isCenterOnLine()
+    {
+        return BoeBot.analogRead(sensorCenterPin) > 700; 
     }
    
 }
