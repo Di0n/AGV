@@ -94,6 +94,11 @@ public class RouteFollower
     {
         return totalControlCodes - controlCodes.size();
     }
+    
+    public String getCurrentStepBTString()
+    {
+        return 'c'+Integer.toString(totalControlCodes - controlCodes.size());
+    }
 
     public boolean hasRoute()
     {

@@ -1,6 +1,6 @@
 import TI.*;
 import java.util.*;
-
+import java.nio.charset.Charset;
 
 public class Bluetooth
 {
@@ -32,7 +32,13 @@ public class Bluetooth
         return readData;
     }
     
-    public void writeData(byte[] data) // java reference?
+    private void writeDataDirectly(byte[] data)
+    {
+        writeQueue.clear();
+        for (int i = 0; i < data.length; i++)
+            conn.writeByte(data[i]);
+    }
+    private void writeData(byte[] data) // java reference?
     {
         // writeQueue = new LinkedList<>(Arrays.asList(data)); ?? waarom werkt dit niet
         writeQueue.clear();
@@ -42,6 +48,19 @@ public class Bluetooth
         }
 
         conn.writeByte(writeQueue.remove());
+    }
+    
+    public void writeString(String data)
+    {
+        String temp = ">" + data + '\0';
+        if (data.length() > 1000)
+            writeData(data.getBytes(Charset.forName("UTF-8")));
+        else writeDataDirectly(data.getBytes(Charset.forName("UTF-8")));
+    }
+    
+    public void sendAcknowledge()
+    {
+        writeDataDirectly(new byte[] {0x3e, 0x06, 0x00});
     }
     
     public boolean isWriting()
