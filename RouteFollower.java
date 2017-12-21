@@ -17,42 +17,39 @@ public class RouteFollower
     private final int sensorRightPin = 0;
     private final int sensorCenterPin = 1;
     private boolean cancel;
-    private boolean correction = false;
-    private boolean stopTurn = false;
     private int crossCounter;
-    //private TI.Timer t1;
 
     public RouteFollower(Transmission transmission, Detection detection)
     {
         this.transmission = transmission;
         this.detection = detection;
         controlCodes = new LinkedList<>();
-        crossCounter = 0;
     }
 
     public void setRoute(Route route)
     {
+        controlCodes.clear();
         this.route = route;
         controlCodes.addAll(route.getControlCodes());
         totalControlCodes = controlCodes.size() + 1;
+        crossCounter = 0;
+        isPreviousCrossing = false;
+        previousCenterCrossing = false;
+        turning= false;
+        cancel = false;
     }
-    boolean isPreviousCrossing = false;
-    boolean previousCenterCrossing = false;
+    boolean isPreviousCrossing;
+    boolean previousCenterCrossing;
     boolean turning; // in transmission
-    boolean stopTurning = false;
      
     public void update()
     {
         if(cancel == true) return;
+        
         sensorLeft = BoeBot.analogRead(sensorLeftPin);
         sensorOuterLeft = BoeBot.analogRead(sensorOuterLeftPin);
         sensorCenter = BoeBot.analogRead(sensorCenterPin);
         sensorRight = BoeBot.analogRead(sensorRightPin);
-        //System.out.println("Left " + sensorLeft);
-        //System.out.println("OuterLeft " + sensorOuterLeft);
-        //System.out.println("Center " + sensorCenter);
-        //System.out.println("Right " + sensorRight);
-        //System.out.println("Overcorssing: " + (isPreviousCrossing == true && detection.isOnCrossing() == false));
         
         
         boolean outerCrossed = (isPreviousCrossing == true && detection.isOnCrossing() == false);
@@ -93,27 +90,34 @@ public class RouteFollower
                 break;
                 case RIGHT:
                 // maak een bocht naar rechts
-                transmission.turnRight(25);
+                transmission.turnRight(30);
+                turning = true;
                 System.out.println("Right");
+                crossCounter = 0;
                 break;
                 case STOP:
                 // Stop, einde van route
                 transmission.emergencyBrake();
                 System.out.println("STOP");
-                break;
+                cancelRoute();
+                return;
                 default:
                 return;
             }
         }
         
-        if (turning == false && sensorCenter > 700)
+        if (turning == false)
        {
-           
-           if (sensorRight > 700) // wit 100 ~ 200
-           {transmission.steerRight();
-               
+        
+           if (sensorCenter > 900)
+           {
+               transmission.goToSpeed(30);
            }
-           else if (sensorLeft> 700) // wit = 100
+           else if (sensorRight > 900) // wit 100 ~ 200
+           {
+               transmission.steerRight();
+           }
+           else if (sensorLeft > 900) // wit = 100
            {
               transmission.steerLeft(); 
            }
@@ -139,7 +143,13 @@ public class RouteFollower
 
     public void cancelRoute()
     {
+        controlCodes.clear();
         cancel = true;
+    }
+    
+    public int getOuterData()
+    {
+        return sensorOuterLeft;
     }
     
 }

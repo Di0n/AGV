@@ -14,7 +14,7 @@ public class Main
         Bluetooth bluetooth = new Bluetooth();
         System.out.println("Running...");
         boolean gek = false;
-        boolean testBt = true;
+        boolean testBt = false;
         BoeBot.wait(3000);
         while (true)
         {
@@ -30,7 +30,10 @@ public class Main
                 //transmission.emergencyBrake();
             }
             if (routeFollower.hasRoute())
+            {
                 routeFollower.update();
+                bluetooth.writeDirectly(routeFollower.getOuterData());
+            }
                 
              if(testBt == true)
             {
@@ -56,7 +59,7 @@ public class Main
                 testBt = false;
                
             }
-            /*
+            
             bluetooth.update();
             if (bluetooth.dataReady())
             {
@@ -73,7 +76,6 @@ public class Main
                     }
                 } 
             }
-            */
 
             BoeBot.wait(1);
         }

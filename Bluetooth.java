@@ -48,4 +48,9 @@ public class Bluetooth
     {
         return writeQueue.size() > 0;
     }
+    
+    public void writeDirectly(int data)
+    {
+        conn.writeByte(data);
+    }
 }
