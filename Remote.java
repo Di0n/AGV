@@ -7,18 +7,20 @@ public class Remote
     
     public enum RemoteButton
     {
-        NONE(0),
-        FORWARD(16), 
-        BACKWARDS(17),
-        LEFT(19),
-        RIGHT(18),
-        STOP(21),
+        NONE(-1),
+        FWD_LEFT45(0),
+        LEFT90(3),
+        BWD_LEFT45(6),
+        FORWARD(1), 
+        BACKWARDS(7),
+        FWD_RIGHT45(2),
+        RIGHT90(5),
+        BWD_RIGHT45(8),
+        EMERGENCY_BRAKE(21),
+        STOP(4),
         ENABLE_REMOTE_CONTROL(77),
-        DISABLE_REMOTE_CONTROL(78),
-        TURN_EIGHT(7),
-        SLOW_TO_SPEED(4);
+        DISABLE_REMOTE_CONTROL(78);
 
-        
         
         private final int value;
         private RemoteButton(int value) 

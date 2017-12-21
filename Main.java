@@ -13,26 +13,28 @@ public class Main
         RouteFollower routeFollower = new RouteFollower(transmission, detection);
         Bluetooth bluetooth = new Bluetooth();
         System.out.println("Running...");
-        boolean gek = false;
         boolean testBt = false;
-        BoeBot.wait(3000);
+
         while (true)
         {
+            BoeBot.wait(1);
+            
             control.update();
             transmission.update();
             detection.update();
 
-            if (detection.getDistanceToObject() <= 5 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled()) // 15 centimeter
+            if (detection.getDistanceToObject() <= 45 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled()) // 15 centimeter
             {
-                //transmission.goSpeedToSlow(-100);
+                transmission.goSpeedToSlow(-100);
                 //transmission.emergencyBrake();
                 System.out.println("stop");
                 //transmission.emergencyBrake();
+                continue;
             }
             if (routeFollower.hasRoute())
             {
                 routeFollower.update();
-                bluetooth.writeDirectly(routeFollower.getOuterData());
+                //bluetooth.writeDirectly(routeFollower.getOuterData());
             }
                 
              if(testBt == true)
@@ -76,8 +78,6 @@ public class Main
                     }
                 } 
             }
-
-            BoeBot.wait(1);
         }
     }
 }

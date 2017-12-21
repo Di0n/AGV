@@ -146,7 +146,7 @@ public class RouteFollower
         controlCodes.clear();
         cancel = true;
     }
-    
+    // @debug
     public int getOuterData()
     {
         return sensorOuterLeft;
