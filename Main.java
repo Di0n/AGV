@@ -17,7 +17,7 @@ public class Main
 
         while (true)
         {
-            BoeBot.wait(1);
+            
             
             control.update();
             transmission.update();
@@ -25,11 +25,14 @@ public class Main
 
             if (detection.getDistanceToObject() <= 45 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled()) // 15 centimeter
             {
-                transmission.goSpeedToSlow(-100);
+                //if (routeFollower.hasRoute())
+                 //   routeFollower.cancelRoute();
+                //transmission.goSpeedToSlow(100);
                 //transmission.emergencyBrake();
                 System.out.println("stop");
                 //transmission.emergencyBrake();
-                continue;
+                
+                //continue;
             }
             if (routeFollower.hasRoute())
             {
@@ -78,6 +81,8 @@ public class Main
                     }
                 } 
             }
+            
+            BoeBot.wait(1);
         }
     }
 }
