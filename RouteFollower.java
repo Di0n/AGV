@@ -152,4 +152,9 @@ public class RouteFollower
         return sensorOuterLeft;
     }
     
+    public String getCurrentStepBTString() 
+    { 
+        return 'c'+Integer.toString(totalControlCodes - controlCodes.size()); 
+    } 
+    
 }

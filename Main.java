@@ -38,6 +38,8 @@ public class Main
             {
                 routeFollower.update();
                 //bluetooth.writeDirectly(routeFollower.getOuterData());
+                if (!bluetooth.isWriting())
+                    bluetooth.writeString(routeFollower.getCurrentStepBTString());
             }
                 
              if(testBt == true)
@@ -74,6 +76,7 @@ public class Main
                 {    
                     routeFollower.setRoute(route);
                     System.out.println("Route accepted!");
+                    bluetooth.sendAcknowledge();
                     ArrayList<Route.ControlCode> codes = new ArrayList<>();
                     for (Route.ControlCode c : codes)
                     {
