@@ -38,8 +38,8 @@ public class Main
             {
                 routeFollower.update();
                 //bluetooth.writeDirectly(routeFollower.getOuterData());
-                if (!bluetooth.isWriting())
-                    bluetooth.writeString(routeFollower.getCurrentStepBTString());
+                //if (!bluetooth.isWriting())
+                   // bluetooth.writeString(routeFollower.getCurrentStepBTString());
             }
                 
              if(testBt == true)
