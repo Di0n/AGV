@@ -1,6 +1,4 @@
 import TI.*;
-import jssc.SerialPort;
-import jssc.SerialPortException;
 import java.util.*;
 
 
@@ -49,5 +47,10 @@ public class Bluetooth
     public boolean isWriting()
     {
         return writeQueue.size() > 0;
+    }
+    
+    public void writeDirectly(int data)
+    {
+        conn.writeByte(data);
     }
 }

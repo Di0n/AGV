@@ -27,32 +27,32 @@ public class RemoteControl
         {
             case FORWARD:
                 //transmission.goToSpeed(50);
-                transmission.goSlowToSpeed(100);
+                transmission.goSlowToSpeed(30);
             break;
             case BACKWARDS:
                 //transmission.goToSpeed(-50);
-                transmission.goSlowToSpeed(-100);
+                transmission.goSlowToSpeed(-30);
             break;
-            case LEFT:
-                transmission.turnDegrees(-90, 50);
+            case LEFT90:
+                transmission.turnDegrees(-120, 100);
                 //transmission.turnLeft();
             break;
-            case RIGHT:
+            case RIGHT90:
                 transmission.turnDegrees(90, 50);
                 //transmission.turnRight();
             break;
             case STOP:
-                transmission.emergencyBrake(); 
+                transmission.goSpeedToSlow(transmission.currentSpeedPercentage());
                 //transmission.goSlowToSpeed(1);
+            break;
+            case EMERGENCY_BRAKE:
+                transmission.emergencyBrake();
             break;
             case ENABLE_REMOTE_CONTROL:
                 remoteControlEngaged = true;
             break;
             case DISABLE_REMOTE_CONTROL:
                 remoteControlEngaged = false;
-            break;
-            case TURN_EIGHT:
-                //transmission.turnEight();
             break;
             default:
             break;
