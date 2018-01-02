@@ -63,6 +63,7 @@ public class Route
      * 0x66 FORWARD Voorwaards
      * 0x6c LEFT Links
      * 0x72 RIGHT Rechts
+     * 0x73 STOP Stop
      * 0x00 \0 Null terminator geeft eind van reeks aan
      * @param data protocol
      * @return Route object

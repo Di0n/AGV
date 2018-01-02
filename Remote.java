@@ -88,7 +88,7 @@ public class Remote
             else
                 val.append(lengths[i]);
         }
-        
+
         int control = Integer.parseInt(val.toString(), 2);
         System.out.println("Value: "+control);
         return new DecodedIRSignal(deviceID.toString(), RemoteButton.getButton(control));
