@@ -151,11 +151,11 @@ public class Transmission
     public void turnDegrees(int degrees, int speedPercentage)
     {
 
-        if (degrees < -180 || degrees > 180 || speedPercentage < 1 || speedPercentage > 100)
+        if (degrees < -180 || degrees > 180)
             return; 
 
         final int fullSpeed360Turn = 1200; // 1600, 1500, 1300
-        final int percentage = fullSpeed360Turn / 100 * speedPercentage;
+        final int percentage = fullSpeed360Turn / 100 * Math.abs(speedPercentage);
 
         final int newTurnSpeed360 = fullSpeed360Turn - percentage + fullSpeed360Turn;
 
