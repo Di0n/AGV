@@ -126,7 +126,7 @@ public class Transmission
         int speed = percentage * speedUnit;
 
         int speedLeft = 1500 - speed;
-        int speedRight = 1500 - speed;
+        int speedRight = 1500 - 40;
         leftServo.update(speedLeft);
         rightServo.update(speedRight);
     }

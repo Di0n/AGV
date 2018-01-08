@@ -24,13 +24,16 @@ public class Main
             detection.update();
             
             //System.out.println("stop: "+detection.getDistanceToObject());
-            if (detection.getDistanceToObject() <= 20 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled())// 40 // 15 centimeter
+            if (detection.getDistanceToObject() <= 10 && transmission.currentSpeed() > 0 && !control.isRemoteControlEnabled())// 40 // 15 centimeter
             {
                 /*
                 System.out.println("stop: "+detection.getDistanceToObject());
                 transmission.emergencyBrake();
                 if (routeFollower.hasRoute()) routeFollower.cancelRoute();
                 continue;*/
+                if (routeFollower.hasRoute()) routeFollower.cancelRoute();
+                transmission.emergencyBrake();
+                continue;
             }
             if (routeFollower.hasRoute())
             {

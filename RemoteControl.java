@@ -53,7 +53,7 @@ public class RemoteControl
             case BWD_RIGHT:
                 transmission.turnDegrees(45, -30);
             case STOP:
-                transmission.goSpeedToSlow(0);
+                transmission.goSpeedToSlow(-100);
                 //transmission.goSlowToSpeed(1);
             break;
             case EMERGENCY_BRAKE:
