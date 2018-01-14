@@ -8,19 +8,18 @@ public class Remote
     public enum RemoteButton
     {
         NONE(-1),
-        FWD_LEFT45(0),
-        LEFT90(3),
-        BWD_LEFT45(6),
-        FORWARD(1), 
-        BACKWARDS(7),
-        FWD_RIGHT45(2),
-        RIGHT90(5),
-        BWD_RIGHT45(8),
+        FORWARD(4),
+        FWD_RIGHT(5),
+        RIGHT(8),
+        BWD_RIGHT(37),
+        BACKWARD(9),
+        BWD_LEFT(12),
+        LEFT(6),
+        FWD_LEFT(3),
+        STOP(7),
         EMERGENCY_BRAKE(21),
-        STOP(4),
         ENABLE_REMOTE_CONTROL(77),
         DISABLE_REMOTE_CONTROL(78);
-
         
         private final int value;
         private RemoteButton(int value) 
@@ -88,9 +87,8 @@ public class Remote
             else
                 val.append(lengths[i]);
         }
-        
+
         int control = Integer.parseInt(val.toString(), 2);
-        System.out.println("Value: "+control);
         return new DecodedIRSignal(deviceID.toString(), RemoteButton.getButton(control));
     }
     

@@ -41,7 +41,6 @@ public class RouteFollower
     boolean isPreviousCrossing;
     boolean previousCenterCrossing;
     boolean turning; // in transmission
-     
     public void update()
     {
         if(cancel == true) return;
@@ -56,8 +55,9 @@ public class RouteFollower
         boolean centerCrossed = (previousCenterCrossing == true && detection.isCenterOnLine() == false); // ?? detection
         
        
-       if (turning == true && (centerCrossed || crossCounter >= 1))
+       if (turning == true && (centerCrossed || crossCounter >=1))
         {
+            
             System.out.println("Counter: "+crossCounter);
             crossCounter++;
             if (detection.isCenterOnLine())
@@ -87,6 +87,7 @@ public class RouteFollower
                 turning = true;
                 crossCounter = 0;
                 System.out.println("left turn");
+              
                 break;
                 case RIGHT:
                 // maak een bocht naar rechts
@@ -94,6 +95,7 @@ public class RouteFollower
                 turning = true;
                 System.out.println("Right");
                 crossCounter = 0;
+               
                 break;
                 case STOP:
                 // Stop, einde van route
